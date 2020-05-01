@@ -1,22 +1,25 @@
 {
-  "name": "greeting-card-texts",
+  "name": "greeting-card-texts-api",
   "version": "1.0.0",
-  "description": "Projektin aiheena on rakentaa sovellus, jolla käyttäjä voi organisoida tervehdyskorttitekstejä aihepiireittäin. Järjestelmä toteutetaan käyttämällä Vue.js-kehystä käyttöliittymän puolella ja Express.js-kehystä palvelinpuolella. Tietokantajärjestelmänä toimii PostgreSQL. Sovellus on tarkoitus julkaista Heroku-alustalla.",
+  "description": "API server",
   "main": "index.js",
+  "engines": {
+    "node": "11.x"
+  },
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marhyvar/greeting-card-texts.git"
+    "url": "git+https://github.com/marhyvar/greeting-card-texts-api.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/marhyvar/greeting-card-texts/issues"
+    "url": "https://github.com/marhyvar/greeting-card-texts-api/issues"
   },
-  "homepage": "https://github.com/marhyvar/greeting-card-texts#readme",
+  "homepage": "https://github.com/marhyvar/greeting-card-texts-api#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

@@ -3,6 +3,7 @@ const tekstiRouter = require('./routes/teksti')
 const teemaRouter = require('./routes/teema')
 const express = require('express')
 const cors = require('cors')
+const { pool } = require('./config')
 const rateLimit = require("express-rate-limit")
 const baseURL = '/api/v1'
 const app = express()
@@ -21,6 +22,18 @@ router.use('/tekstit', tekstiRouter)
 app.use(baseURL, router)
 app.get('/', (req, res) => {
     res.json({ info: 'Express and PostgreSQL API'})
+})
+
+app.get('/teemat', (request, response) => {
+    pool.query('SELECT * FROM teemat', (error, results) => {
+        if (error) {
+            response.status(500).send('error')
+        } else if (results) {
+            response.status(200).json(results.rows)
+        } else {
+            response.status(404).send('Not found')
+        }
+    })
 })
 
 // Käynnistä palvelin

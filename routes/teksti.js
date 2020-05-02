@@ -9,7 +9,11 @@ router.get('/', (request, response) => {
         if (error) {
             throw error
         }
-        response.status(200).json(results.rows)
+        if (results.rows.length > 0) {
+            response.status(200).json(results.rows)
+        } else {
+            response.status(404).send('Not found')
+        }
     })
 })
 
@@ -20,7 +24,11 @@ router.get('/:id', (request, response) => {
         if (error) {
             throw error
         }
-        response.status(200).json(results.rows)
+        if (results.rows.length > 0) {
+            response.status(200).json(results.rows)
+        } else {
+            response.status(404).send('Not found')
+        }
     })
 })
 

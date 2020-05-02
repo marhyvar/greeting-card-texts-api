@@ -9,7 +9,7 @@ router.get('/', (request, response) => {
         if (error) {
             response.status(500).send('error')
         }
-        if (results.rows.length > 0) {
+        if (results) {
             response.status(200).json(results.rows)
         } else {
             response.status(404).send('Not found')
@@ -45,7 +45,7 @@ router.get('/:id/tekstit', (request, response) => {
         if (error) {
             response.status(500).send('error')
         }
-        if (results.rows.length > 0) {
+        if (results) {
             response.status(200).json(results.rows)
         } else {
             response.status(404).send('Not found')

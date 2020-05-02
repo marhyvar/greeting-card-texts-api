@@ -5,17 +5,15 @@ const { check, validationResult } = require('express-validator');
 
 //hae tekstit
 router.get('/', (request, response) => {
-    pool.connect()
     pool.query('SELECT * FROM tekstit', (error, results) => {
         if (error) {
             response.status(500).send('error')
         }
-        if (results.rows.length > 0) {
+        if (results) {
             response.status(200).json(results.rows)
         } else {
             response.status(404).send('Not found')
         }
-        pool.end();
     })
 })
 
@@ -26,7 +24,7 @@ router.get('/:id', (request, response) => {
         if (error) {
             response.status(500).send('error')
         }
-        if (results.rows.length > 0) {
+        if (results) {
             response.status(200).json(results.rows)
         } else {
             response.status(404).send('Not found')

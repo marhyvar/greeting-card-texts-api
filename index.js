@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
 app.get('/teemat', (request, response) => {
     pool.query('SELECT * FROM teemat', (error, results) => {
         if (error) {
+            console.log(error)
             response.status(500).send('error')
         } else if (results) {
             response.status(200).json(results.rows)

@@ -1,34 +1,18 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const { pool } = require('./config')
 
+const tekstiRouter = require('./routes/teksti')
+const teemaRouter = require('./routes/teema');
+const express = require('express')
+const cors = require('cors')
+//const baseURL = '/api/v1'
 const app = express()
+//const router = express.Router()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-
-const haeTeemat = (request, response) => {
-    pool.query('SELECT * FROM teemat', (error, results) => {
-        if (error) {
-            throw error
-        }
-        response.status(200).json(results.rows)
-    })
-}
-
-const haeTekstit = (request, response) => {
-    pool.query('SELECT * FROM tekstit', (error, results) => {
-        if (error) {
-            throw error
-        }
-        response.status(200).json(results.rows)
-    })
-}
-
-app.get('/teemat', haeTeemat)
-app.get('/tekstit', haeTekstit)
+app.use('/api/v1/teemat', teemaRouter)
+app.use('/api/v1/tekstit', tekstiRouter)
+//app.use(baseURL, router)
 
 // Käynnistä palvelin
 app.listen(process.env.PORT || 3002, () => {

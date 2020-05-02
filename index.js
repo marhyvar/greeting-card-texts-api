@@ -24,19 +24,6 @@ app.get('/', (req, res) => {
     res.json({ info: 'Express and PostgreSQL API'})
 })
 
-app.get('/teemat', (request, response) => {
-    pool.query('SELECT * FROM teemat', (error, results) => {
-        if (error) {
-            console.log(error)
-            response.status(500).send('error')
-        } else if (results) {
-            response.status(200).json(results.rows)
-        } else {
-            response.status(404).send('Not found')
-        }
-    })
-})
-
 // Käynnistä palvelin
 app.listen(process.env.PORT || 3002, () => {
     console.log(`Palvelin kuulolla...`)

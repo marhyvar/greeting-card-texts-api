@@ -4,7 +4,7 @@
   "description": "API server",
   "main": "index.js",
   "engines": {
-    "node": "11.x"
+    "node": "12.16.x"
   },
   "scripts": {
     "start": "node index.js",

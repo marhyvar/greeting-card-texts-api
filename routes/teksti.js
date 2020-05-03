@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 router.get('/', (request, response) => {
     pool.query('SELECT * FROM tekstit', (error, results) => {
         if (error) {
-            response.status(500).send('error')
+            response.status(500).send(error)
         } else if (results) {
             response.status(200).json(results.rows)
         } else {
@@ -21,7 +21,7 @@ router.get('/:id', (request, response) => {
     const id = parseInt(request.params.id)
     pool.query('SELECT * FROM tekstit WHERE id = $1', [id], (error, results) => {
         if (error) {
-            response.status(500).send('error')
+            response.status(500).send(error)
         } else if (results) {
             response.status(200).json(results.rows)
         } else {
@@ -50,7 +50,7 @@ router.post('/', [
     const teema_id = parseInt(request.body.teema_id)
     pool.query('INSERT INTO tekstit (teksti, teema_id) VALUES ($1, $2)', [teksti, teema_id], (error, results) => {
         if (error) {
-            return response.status(500).send('error')
+            return response.status(500).send(error)
         }
         response.status(201).send('Teksti luotu')
     })
@@ -75,7 +75,7 @@ router.put('/:id', [
         [teksti, teema_id, id],
         (error, results) => {
             if (error) {
-                return response.status(500).send('error')
+                return response.status(500).send(error)
             }
         response.status(200).send(`Teksti muokattu, ID: ${id}`)
         }
@@ -88,7 +88,7 @@ router.delete('/:id', (request, response) => {
 
     pool.query('DELETE FROM tekstit WHERE id = $1', [id], (error, results) => {
         if (error) {
-            return response.status(500).send('error')
+            return response.status(500).send(error)
         }
         response.status(200).send(`Teksti poistettu, ID: ${id}`)
     })

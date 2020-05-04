@@ -29,11 +29,11 @@ router.post('/', [
         return response.status(422).json({ errors: errors.array() })
     }
     const teema = request.body.teema 
-    pool.query('INSERT INTO teemat (teema) VALUES ($1)', [teema], (error, results) => {
+    pool.query('INSERT INTO teemat (teema) VALUES ($1) RETURNING teema_id', [teema], (error, results) => {
         if (error) {
             return response.status(500).send(error)
         }
-        response.status(201).send('Teema luotu')
+        response.status(201).send(result.rows[0])
     })
 })
 

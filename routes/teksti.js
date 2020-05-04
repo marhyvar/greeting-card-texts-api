@@ -48,11 +48,11 @@ router.post('/', [
 
     const teksti = request.body.teksti 
     const teema_id = parseInt(request.body.teema_id)
-    pool.query('INSERT INTO tekstit (teksti, teema_id) VALUES ($1, $2)', [teksti, teema_id], (error, results) => {
+    pool.query('INSERT INTO tekstit (teksti, teema_id) VALUES ($1, $2) RETURNING id', [teksti, teema_id], (error, results) => {
         if (error) {
             return response.status(500).send(error)
         }
-        response.status(201).send('Teksti luotu')
+        response.status(201).send(result.rows[0])
     })
 })
 

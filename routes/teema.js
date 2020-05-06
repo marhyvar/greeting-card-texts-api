@@ -33,7 +33,7 @@ router.post('/', [
         if (error) {
             return response.status(500).send(error)
         }
-        response.status(201).send(result.rows[0])
+        response.status(201).send(results.rows[0])
     })
 })
 

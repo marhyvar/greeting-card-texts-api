@@ -1,0 +1,38 @@
+
+version: '3.8'
+
+services:
+  backend-dev-env:
+    build: .
+    command: npm run dev
+    depends_on:
+      - db
+    ports: 
+      - 3002:3002
+    environment:
+      NODE_ENV: dev
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+    links:
+      - db
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    container_name: backend-dev-env
+  db:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/db_files
+    container_name: postgres_for_dev
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./database:/var/lib/postgresql/data/db_files
+volumes:
+  node_modules:
